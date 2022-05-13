@@ -7,17 +7,12 @@ html.dataset.dark = localStorage.dark || prefersDarkMode.matches;
 toggle.addEventListener('click', () => {
 localStorage.dark = !(html.dataset.dark == 'true');
 html.dataset.dark = localStorage.dark;
-});</script><meta name="generator" content="Hexo 6.1.0"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">「课程分享」超线程</h1><a id="logo" href="/.">Discut</a><p class="description"></p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a><a href="/atom.xml"><i class="fa fa-rss"> 订阅</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">「课程分享」超线程</h1><div class="post-meta">2022-05-12</div><div class="post-content"><h1 id="Intel超线程-AMD线程撕裂者"><a href="#Intel超线程-AMD线程撕裂者" class="headerlink" title="Intel超线程 | AMD线程撕裂者"></a>Intel超线程 | AMD线程撕裂者</h1><hr>
+});</script><meta name="generator" content="Hexo 6.1.0"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">「课程分享」超线程</h1><a id="logo" href="/.">Discut</a><p class="description"></p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a><a href="/atom.xml"><i class="fa fa-rss"> 订阅</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">「课程分享」超线程</h1><div class="post-meta">2022-05-12</div><div class="clear"><div class="toc-article" id="toc"><div class="toc-title">文章目录</div><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Intel%E8%B6%85%E7%BA%BF%E7%A8%8B-AMD%E7%BA%BF%E7%A8%8B%E6%92%95%E8%A3%82%E8%80%85"><span class="toc-number">1.</span> <span class="toc-text">Intel超线程 | AMD线程撕裂者</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E4%BB%80%E4%B9%88%E6%98%AF%E8%B6%85%E7%BA%BF%E7%A8%8B-%E7%BA%BF%E7%A8%8B%E6%92%95%E8%A3%82%E8%80%85"><span class="toc-number">1.1.</span> <span class="toc-text">1. 什么是超线程 | 线程撕裂者</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E8%B6%85%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86"><span class="toc-number">1.2.</span> <span class="toc-text">2. 超线程的实现原理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E8%B6%85%E7%BA%BF%E7%A8%8B%E6%A0%B8%E5%BF%83%E4%B8%8E%E6%99%AE%E9%80%9A%E6%A0%B8%E5%BF%83%E7%9A%84%E5%AF%B9%E6%AF%94"><span class="toc-number">1.2.1.</span> <span class="toc-text">2.1 超线程核心与普通核心的对比</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-ILP%EF%BC%88%E6%8C%87%E4%BB%A4%E7%BA%A7%E5%B9%B6%E8%A1%8C%EF%BC%89"><span class="toc-number">1.2.2.</span> <span class="toc-text">2.2 ILP（指令级并行）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-HT%EF%BC%88%E8%B6%85%E7%BA%BF%E7%A8%8B%EF%BC%89-x2F-SMT"><span class="toc-number">1.2.3.</span> <span class="toc-text">2.3 HT（超线程）&#x2F;SMT</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E4%BB%A3%E7%A0%81%E6%A8%A1%E6%8B%9F"><span class="toc-number">1.3.</span> <span class="toc-text">3. 代码模拟</span></a></li></ol></li></ol></div></div><div class="post-content"><h1 id="Intel超线程-AMD线程撕裂者"><a href="#Intel超线程-AMD线程撕裂者" class="headerlink" title="Intel超线程 | AMD线程撕裂者"></a>Intel超线程 | AMD线程撕裂者</h1><hr>
 <blockquote>
 <p>同步多线程</p>
 <p>参考资料：</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/20277695">超线程技术在线程这个层面是否是真正的空间并行？ - 知乎 (zhihu.com)</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/502259138">计算机外行，超线程和多线程的区别是什么，前者是并行的吗，它可以叠加多线程并发吗？ - 知乎 (zhihu.com)</a></li>
 <li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/idorax/p/6884088.html">图说超线程技术(Hyper-Threading Technology) - veli - 博客园 (cnblogs.com)</a></li>
-<li><a target="_blank" rel="noopener" href="https://wiki.mbalib.com/wiki/%E8%B6%85%E7%BA%BF%E7%A8%8B%E6%8A%80%E6%9C%AF">超线程技术 - MBA智库百科 (mbalib.com)</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Fv411J7n4?p=9">视频 P9</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Gr4y1Q7xY">「Coding Master」第52话 翻译翻译，什么是进程线程超线程？_哔哩哔哩_bilibili</a></li>
 <li><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Fs411z7FX">【官方双语】超线程在Win中到底起什么作用？#Linus谈科技_哔哩哔哩_bilibili</a></li>
 <li><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1t4411e7LH?p=108">计算机组成原理（哈工大刘宏伟）135讲（全）高清_哔哩哔哩_bilibili</a></li>
 </ul>
@@ -42,20 +37,21 @@ html.dataset.dark = localStorage.dark;
 <p>简单介绍超线程技术与历史</p>
 </blockquote>
 <p>简单的来说，超线程就是一项允许CPU中一个核心在单个时钟周期上同时执行多个指令流的技术。超线程其实源于SMT（<strong>Simultaneous multithreading</strong> 也成为 同步多线程 同时多线程），这个名称只是Intel家SMT技术的商业名称罢了，与之相类似的还有AMD的线程撕裂者CPU搭载了AMD自家的SMT技术。</p>
-<p>其实SMT与超线程等技术的出现也代表着我们CPU技术的进步。随着CPU频率越来越高，CPU中集成的技术越来越多，必然的CPU可压榨的空间也就也来越小。为了更好的压榨CPU，技术人员们发现了常规的CPU大约需要两万个时钟周期才能完成不同线程间的转换，在这期间，CPU的利用率是极低，那为什么不在CPU切换线程的时候让其他部分工作起来呢？在这个问题的背景下，IBM的实验室诞生了SMT技术，也就是超线程的前身。（好的，技术人员们发现了盲点，技术人员成功的有一次压榨了CPU）</p>
+<p>其实SMT与超线程等技术的出现也代表着我们CPU技术的进步。随着CPU频率越来越高，CPU中集成的技术越来越多，必然CPU可压榨的空间也就也来越小。为了更好的压榨CPU，技术人员们发现了常规的CPU大约需要两万个时钟周期才能完成不同线程间的转换，在这期间，CPU的利用率是极低，那为什么不在CPU切换线程的时候让其他部分工作起来呢？在这个问题的背景下，IBM的实验室诞生了SMT技术，也就是超线程的前身。（好的，技术人员们发现了盲点，技术人员成功的又一次压榨了CPU）</p>
 <h2 id="2-超线程的实现原理"><a href="#2-超线程的实现原理" class="headerlink" title="2. 超线程的实现原理"></a>2. 超线程的实现原理</h2><h3 id="2-1-超线程核心与普通核心的对比"><a href="#2-1-超线程核心与普通核心的对比" class="headerlink" title="2.1 超线程核心与普通核心的对比"></a>2.1 超线程核心与普通核心的对比</h3><p><img src='.\超线程图示.png' align="middle"/></p>
 <center><font size=3>图2-1 超线程图示</font></center>
 
 <p><img src='.\两核两线程CPU示意图.png' align="middle"/></p>
 <center><font size=3>图2-2 两核两线程CPU示意图</font></center>
 
-<p>我们可以看到，拥有超线程技术的核心只比没拥有技术的核心多出一套Register和PC（当然你虚拟几个核心就多出几套）。那么，多出来的东西是如何实现让核心虚拟出多个线程的呢，那我们就不由得引出一个新概念—ILP（指令集并行）。</p>
+<p>我们可以看到，拥有超线程技术的核心只比没拥有技术的核心多出一套Register和PC（当然你虚拟几个核心就多出几套。「 不过一般也就一核心两线程(。・ω・。) 」）。那么，多出来的东西是如何实现让核心虚拟出多个线程的呢，那我们就不由得引出一个新概念—ILP（指令集并行）。</p>
 <h3 id="2-2-ILP（指令级并行）"><a href="#2-2-ILP（指令级并行）" class="headerlink" title="2.2 ILP（指令级并行）"></a>2.2 ILP（指令级并行）</h3><blockquote>
 <p>参考文章：</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/352676442">说一说超线程&#x2F;同步多线程（HT&#x2F;SMT）技术那些事儿 - 知乎 (zhihu.com)</a></li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/352676442">说一说超线程&#x2F;同步多线程（HT&#x2F;SMT）</a></li>
 <li><a target="_blank" rel="noopener" href="https://zh.m.wikipedia.org/zh-hans/%E5%90%8C%E6%97%B6%E5%A4%9A%E7%BA%BF%E7%A8%8B">同时多线程 - 维基百科，自由的百科全书 (wikipedia.org)</a></li>
 <li><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Instruction-level_parallelism">指令级并行性 - 维基百科 (wikipedia.org)</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1t4411e7LH?p=108">计算机组成原理（哈工大刘宏伟）</a></li>
 </ul>
 </blockquote>
 <p>ILP技术能使计算机程序的一系列指令能并发的同时执行。</p>
@@ -64,8 +60,7 @@ html.dataset.dark = localStorage.dark;
 
 <p>可以看见一共有三个操作，①②操作互不影响，③操作必须等待①②操作执行后才能运行。然而普通的CPU只能顺序执行这三个操作，如果我们假设每个操作都在一个时间单位内完成，那么总共需要3个单位时间，使用ILP只需要2个单位时间。</p>
 <p>可见，ILP允许程序指令并行执行，甚至可以改变程序指令执行的顺序。</p>
-<h3 id="2-3-HT（超线程）-x2F-SMT"><a href="#2-3-HT（超线程）-x2F-SMT" class="headerlink" title="2.3 HT（超线程）&#x2F;SMT"></a>2.3 HT（超线程）&#x2F;SMT</h3><p>在CPU拥有ILP技术的情况下（实现了这样技术的CUP可成为超标量架构CPU）</p>
-<p>我们可将一个拥有5个指令的任务抽象为，</p>
+<h3 id="2-3-HT（超线程）-x2F-SMT"><a href="#2-3-HT（超线程）-x2F-SMT" class="headerlink" title="2.3 HT（超线程）&#x2F;SMT"></a>2.3 HT（超线程）&#x2F;SMT</h3><p>在CPU拥有ILP技术的情况下（实现了类似这样技术的CPU可称为超标量架构CPU）我们可将一个拥有5个指令的任务抽象为，</p>
 <figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">任务I = <span class="built_in">A1</span> + B1 + <span class="built_in">C1</span> + <span class="built_in">A2</span> + B2</span><br></pre></td></tr></table></figure>
 
 <p>还是假设每个操作（指令）都在一个时间单位内完成，那么普通CPU需要5个单位时间。</p>
